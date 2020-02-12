@@ -15,10 +15,13 @@ spec:
         app: chat-sample-web
     spec:
       containers:
-      - name: chat-sample-web
-        image: thakarchinmay/chat-sample-web:latest
-        ports:
-        - containerPort: 3000
+        - name: chat-sample-web
+          image: iad.ocir.io/orasenatdpltoci01/thakarchinmay/chat-sample-web:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: password123
 ---
 apiVersion: v1
 kind: Service
@@ -29,6 +32,6 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 3000
+    - port: 3000
   selector:
     app: chat-sample-web
